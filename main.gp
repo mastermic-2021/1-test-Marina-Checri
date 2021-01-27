@@ -18,9 +18,9 @@ k=encode("haricot");
 
 clair = dechiffre_vigenere(text,k);
 clair = decode(clair);
-print("Le message obtenu après déchiffrement est : \n");
+\\print("Le message obtenu après déchiffrement est : \n");
 print(clair);
-print("\n");
+\\print("\n");
 
 \\Vérification :
 \\code = decode(vigenere(encode(clair),k));
