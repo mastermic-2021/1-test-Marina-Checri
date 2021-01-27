@@ -1,0 +1,13 @@
+os: linux
+sudo: yes
+compiler: gcc
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libgmp-dev
+install:
+    - ./.install-pari.sh
+cache:
+    directories:
+        - pari-2.11.1
+script:
+    - make check
