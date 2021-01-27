@@ -6,27 +6,23 @@ encode(s) = {
 decode(v) = {
   ascii2str([ if(c==0,32,c+96) | c <- v]);
 }
-text=readstr("input.txt")[1];
-k=encode("haricot");
 
-text=encode(text);
-
-\\On va de 1 à 26, donc on fait modulo 27 + 1 :
+\\Attention : on prend en compte l'espace, donc on opère modulo 27.
 vigenere(message,key) = vector(#message,i,(message[i] + key[(i-1) % #key + 1]) % 27);
-\\Pour le déchiffrement, on remplace +k par -k :
+\\Pour le déchiffrement, on remplace +k par -k (c'est un "chiffre de César généralisé").
 dechiffre_vigenere(message,key) = vector(#message,j,(message[j] - key[(j-1) % #key + 1]) % 27);
 
-m = dechiffre_vigenere(text,k);
-m = decode(m);
-print(m); print("\n");
+text=readstr("input.txt")[1];
+text=encode(text);
+k=encode("haricot");
+
+clair = dechiffre_vigenere(text,k);
+clair = decode(clair);
+print("Le message obtenu après déchiffrement est : \n");
+print(clair);
+print("\n");
 
 \\Vérification :
-code = decode(vigenere(encode(m),k));
-print(code);
+\\code = decode(vigenere(encode(clair),k));
+\\print(code);
 \\On doit retrouver le texte du fichier input.txt
-
-
-\\ resoudre l'exercice, bien mettre des ; a la fin des lignes
-
-\\ a la fin, faire simplement
-\\ print(clair);
